@@ -1,0 +1,29 @@
+/* custom-timetable.css */
+.custom-timetable-body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 20px;
+}
+.custom-timetable-table {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+}
+.custom-timetable-th, .custom-timetable-td {
+    padding: 12px 20px;
+    text-align: center;
+    border-bottom: 2px solid #dee2e6;
+}
+.custom-timetable-th {
+    background-color: #007bff;
+    color: white;
+}
+.custom-timetable-td {
+    background-color: #ffffff;
+    color: #980063;
+}
+.custom-timetable-time {
+    font-weight: bold;
+    color: #000000;
+}

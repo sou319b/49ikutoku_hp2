@@ -1,0 +1,158 @@
+.hudar1 {
+    margin-top: -6px;
+    margin-bottom: -6px;
+}
+
+/*mapのサイズ指定*/
+iframe {
+    width: 100%
+}
+
+/*スクロールコンテン*/
+.scrollable-container {
+    width: 100%;    /* コンテナの幅 */
+    height: 400px;   /* コンテナの高さ */
+    border: 1px solid #ccc; /* 境界線のスタイル */
+    overflow: auto;  /* スクロールバーの自動表示 */
+    padding: 15px;   /* 内部の余白 */
+}
+
+/*ポスター画像*/
+.festival_poster {   
+    height: 400px; 
+}
+
+/*タイトル画像*/
+.title-pic {
+    max-width: 80%;
+    max-height: 65vh;
+    height: auto;
+    width: auto;
+}
+
+
+/*禁止事項*/
+.kinnsi-text {
+    background-color: #FFFFFF;
+}
+
+
+/*迷子案内*/
+.lost-notice {
+    border: 2px solid #FFE854;
+    background-color: #FFFECC;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    margin: 10px 0;
+}
+.lost-notice h1 {
+    color: #333;
+    font-size: 24px;
+    line-height: 1.2; /* 行間を詰める */
+}
+.lost-notice p {
+    color: #666;
+    font-size: 16px;
+    line-height: 0.6; /* 行間を詰める */
+    text-align: left;
+}
+.lost-notice button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+.lost-notice button:hover {
+    background-color: #45a049;
+}
+
+.event-p div {
+    background-color: #FFFFFF;
+}
+
+/*背景チェッカーボードパターン
+body {
+    background-color: #f7f7f7;
+    background-image: linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc),
+                      linear-gradient(45deg, #ccc 25%, transparent 25%, transparent 75%, #ccc 75%, #ccc);
+    background-position: 0 0, 25px 25px;
+    background-size: 50px 50px;
+}　*/
+
+/*概要*/
+.summary-container {
+  background-color: #f9f9f9; /* 背景色を薄いグレーに設定 */
+  border: 1px solid #ddd; /* 境界線を薄いグレーに設定 */
+  padding: 20px; /* 内側の余白を設定 */
+  border-radius: 10px; /* 角を丸くする */
+  max-width: 800px; /* 最大幅を設定 */
+  margin: 20px auto; /* 中央に配置 */
+}
+
+.summary-title {
+  font-size: 1.5em; /* フォントサイズを大きくする */
+  margin-bottom: 10px; /* 下部の余白を設定 */
+  color: #333; /* 文字色を濃いグレーに設定 */
+}
+
+.summary-text {
+  font-size: 1em; /* フォントサイズを通常に設定 */
+  line-height: 1.6; /* 行間を設定 */
+  color: #666; /* 文字色をやや薄いグレーに設定 */
+}
+/*概要おわり*/
+
+
+/*協賛*/
+.sponsors {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.sponsors .sponsor {
+    background-color: white;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    text-align: center;
+    width: 150px;
+}
+
+.sponsors .sponsor img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+}
+
+.sponsors .sponsor p {
+    margin: 10px 0 0;
+    font-weight: bold;
+}
+/*協賛終わり*/
+
+/*ヘッダー固定*/
+.fixed-header {
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
+
+
+/*アクセス画像 */
+.main-akuseus{
+    height: 80%;
+    width: 80%;
+}
+
+
+/*ふらいとくん画像 */
+.huraitokun {
+    height: 100%;
+    width: 100%;
+}
