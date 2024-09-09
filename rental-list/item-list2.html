@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ジャンル別レンタル品リスト</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .genre-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .genre-button {
+            padding: 10px 20px;
+            margin: 0 10px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+        .genre-button:hover {
+            background-color: #0056b3;
+        }
+        .genre-button.active {
+            background-color: #0056b3;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .genre-section {
+            display: none;
+        }
+        .genre-section.active {
+            display: block;
+        }
+        .genre-title {
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #007bff;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        .card-header {
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        .card-title {
+            margin: 0;
+            font-size: 18px;
+        }
+        .card-content {
+            padding: 15px;
+        }
+        .items-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 15px;
+        }
+        .item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .item img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 4px;
+            margin-bottom: 8px;
+        }
+        .item-name {
+            font-weight: bold;
+            font-size: 14px;
+            margin: 0;
+        }
+        .item-quantity {
+            font-size: 12px;
+            color: #666;
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="genre-buttons" role="tablist">
+            <button class="genre-button active" data-genre="飲食" role="tab" aria-selected="true">飲食</button>
+            <button class="genre-button" data-genre="講義室" role="tab" aria-selected="false">講義室</button>
+            <button class="genre-button" data-genre="学内企画" role="tab" aria-selected="false">学内企画</button>
+        </div>
+        <input type="text" id="search" placeholder="団体名で検索..." aria-label="団体名で検索">
+        <div id="genres-container"></div>
+    </div>
+
+    <script>
+        // 仮のデータ（実際には多くの団体のデータを用意します）
+        const organizations = [
+            
+            {
+                name: "イベント局/飲食担当",
+                genre: "飲食",
+                items: [
+                    { name: "アイスボックス", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/e08-050100-300.jpg" },
+                ],
+            },
+            {
+                name: "イベント局/団体予備",
+                genre: "飲食",
+                items: [
+                    { name: "アイスボックス", quantity: 4, imageUrl: "https://event.kasite.net/sys_img/item/image1/e08-050100-300.jpg" },
+                    { name: "長方形テーブル　ワイド", quantity: 4, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00119-300.jpg" },
+                    { name: "消火器", quantity: 3, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
+                ],
+            },
+            {
+                name: "岡本学研究室/ハッシュドポテト",
+                genre: "飲食",
+                items: [
+                    { name: "横幕 3k(白)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "消火器", quantity: 1, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
+                    { name: "台付鉄板焼器", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00419-300.jpg" },
+                  
+                ],
+            },
+            {
+                name: "KAIT NLSC/たこ焼き",
+                genre: "飲食",
+                items: [
+                    { name: "横幕 3k(白)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "消火器", quantity: 1, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
+                    { name: "アイスボックス", quantity: 3, imageUrl: "https://event.kasite.net/sys_img/item/image1/e08-050100-300.jpg" },
+                    { name: "フライヤーセット", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00427-300.jpg" },
+                    { name: "長方形テーブル　ワイド", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00119-300.jpg" },
+                    { name: "長方形テーブル　シングル", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00118-300.jpg" },
+                ],
+            },
+            {
+                name: "KAITpia/揚げパン・ドリンク",
+                genre: "飲食",
+                items: [
+                    { name: "横幕 3k(白)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "消火器", quantity: 1, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
+                    { name: "フライヤーセット", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00427-300.jpg" },
+                    { name: "アイスボックス", quantity: 3, imageUrl: "https://event.kasite.net/sys_img/item/image1/e08-050100-300.jpg" },
+                    { name: "長方形テーブル　ワイド", quantity: 3, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00119-300.jpg" },
+                    { name: "アイスクリームストッカー(102L)", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000186-300.jpg" },
+                ],
+            },
+            {
+                name: "kaitウィンタースポーツサークル/お好み焼き",
+                genre: "飲食",
+                items: [
+                    { name: "横幕 3k(白)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "消火器", quantity: 1, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
+                    { name: "台付鉄板焼器", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00419-300.jpg" },
+                    { name: "アイスボックス", quantity: 3, imageUrl: "https://event.kasite.net/sys_img/item/image1/e08-050100-300.jpg" },
+                    { name: "長方形テーブル　ワイド", quantity: 4, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00119-300.jpg" },
+                ],
+            },
+            {
+                name: "バトミントン部/サーターアンダギー・ドリンク",
+                genre: "飲食",
+                items: [
+                    { name: "横幕 3k(白)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "消火器", quantity: 1, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
+                    { name: "フライヤーセット", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00427-300.jpg" },
+                    { name: "アイスボックス", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/e08-050100-300.jpg" },
+                    { name: "クーラーボックス(150L)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00459-300.jpg" },
+                    { name: "アイスクリームストッカー(102L)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000186-300.jpg" },
+                    { name: "長方形テーブル　ワイド", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00119-300.jpg" },
+                    { name: "長方形テーブル　シングル", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00118-300.jpg" },
+
+                ],
+            },
+            {
+                name: "臨床工学技/フルーツ飴",
+                genre: "飲食",
+                items: [
+                    { name: "横幕 3k(白)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "消火器", quantity: 1, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
+                    { name: "長方形テーブル　ワイド", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00119-300.jpg" },
+                    { name: "長方形テーブル　シングル", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00118-300.jpg" },
+                ],
+            },
+            {
+                name: "宮崎研究室/ポップコーン",
+                genre: "飲食",
+                items: [
+                    { name: "横幕 3k(白)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "消火器", quantity: 1, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
+                    { name: "ポップコーン機", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00450-300.jpg" },
+                    { name: "長方形テーブル　ワイド", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00119-300.jpg" },
+                ],
+            },
+            {
+                name: "ラグビー部/やきそば・ドリンク",
+                genre: "飲食",
+                items: [
+                    { name: "横幕 3k(白)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "消火器", quantity: 1, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
+                    { name: "クーラーボックス(150L)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00459-300.jpg" },
+                    { name: "台付鉄板焼器", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00419-300.jpg" },
+                    { name: "アイスボックス", quantity: 4, imageUrl: "https://event.kasite.net/sys_img/item/image1/e08-050100-300.jpg" },
+                    { name: "長方形テーブル　シングル", quantity: 3, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00118-300.jpg" },
+                ],
+            },
+            {
+                name: "陳研究室/クレープ",
+                genre: "飲食",
+                items: [
+                    { name: "横幕 3k(白)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "消火器", quantity: 1, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
+                    { name: "ホットプレート", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00629-300.jpg" },
+                    { name: "アイスクリームストッカー(102L)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000186-300.jpg" },
+                    { name: "アイスボックス", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/e08-050100-300.jpg" },
+                    { name: "長方形テーブル　ワイド", quantity: 4, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00119-300.jpg" },
+                ],
+            },
+            {
+                name: "上田研究室/ポテトチップス",
+                genre: "飲食",
+                items: [
+                    { name: "横幕 3k(白)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "消火器", quantity: 1, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
+                    { name: "長方形テーブル　ワイド", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00119-300.jpg" },
+                    { name: "アイスボックス", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/e08-050100-300.jpg" },
+                    { name: "フライヤーセット", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00427-300.jpg" },
+                    { name: "ホットショーケース", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00447-300.jpg" },
+                ],
+            },
+            {
+                name: "体育会スキー部/唐揚げ・ドリンク",
+                genre: "飲食",
+                items: [
+                    { name: "横幕 3k(白)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "消火器", quantity: 1, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
+                    { name: "クーラーボックス(150L)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00459-300.jpg" },
+                    { name: "アイスクリームストッカー(102L)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000186-300.jpg" },
+                    { name: "フライヤーセット", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00427-300.jpg" },
+                    { name: "長方形テーブル　ワイド", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00119-300.jpg" },
+                    { name: "長方形テーブル　シングル", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00118-300.jpg" },
+                ],
+            },
+            {
+                name: "塩川研究室/浜松餃子",
+                genre: "飲食",
+                items: [
+                    { name: "横幕 3k(白)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "消火器", quantity: 1, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
+                    { name: "卓上鉄板焼器", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00421-300.jpg" },
+                    { name: "アイスボックス", quantity: 3, imageUrl: "https://event.kasite.net/sys_img/item/image1/e08-050100-300.jpg" },
+                    { name: "長方形テーブル　ワイド", quantity: 4, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00119-300.jpg" },
+                    { name: "ホットショーケース", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00447-300.jpg" },
+                ],
+            },
+            {
+                name: "木村研究室/綿菓子",
+                genre: "飲食",
+                items: [
+                    { name: "横幕 3k(白)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "消火器", quantity: 1, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
+                    { name: "綿菓子機", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00449-300.jpg" },
+                    { name: "アイスボックス", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/e08-050100-300.jpg" },
+                    { name: "長方形テーブル　ワイド", quantity: 4, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00119-300.jpg" },
+                ],
+            },
+            {
+                name: "岡本剛/フランクフルト",
+                genre: "飲食",
+                items: [
+                    { name: "横幕 3k(白)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "消火器", quantity: 1, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
+                    { name: "ガスコンロ(LPガス用)　大", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00436-500.jpg" },
+                    { name: "寸胴鍋 28L", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00441-300.jpg" },
+                    { name: "ホットショーケース", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00447-300.jpg" },
+                    { name: "台付鉄板焼器", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00419-300.jpg" },
+                    { name: "アイスボックス", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/e08-050100-300.jpg" },
+                    { name: "アイスクリームストッカー(102L)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000186-300.jpg" },
+                    { name: "長方形テーブル　ワイド", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00119-300.jpg" },
+                    { name: "長方形テーブル　シングル", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00118-300.jpg" },
+                ],
+            },
+            {
+                name: "バレーボールサークル/ホットドッグ",
+                genre: "飲食",
+                items: [
+                    { name: "横幕 3k(白)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "消火器", quantity: 1, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
+                    { name: "台付鉄板焼器", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00419-300.jpg" },
+                    { name: "アイスクリームストッカー(102L)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000186-300.jpg" },
+                    { name: "アイスボックス", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/e08-050100-300.jpg" },
+                    { name: "クーラーボックス(150L)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00459-300.jpg" },
+                    { name: "パイプ椅子(学校備品)", quantity: 3, imageUrl: "学校備品" },
+                    { name: "長方形テーブル　シングル", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00118-300.jpg" },
+                ],
+            },
+            {
+                name: "文芸部/豚汁",
+                genre: "飲食",
+                items: [
+                    { name: "横幕 3k(白)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "消火器", quantity: 1, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
+                    { name: "ガスコンロ(LPガス用)　大", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00436-500.jpg" },
+                    { name: "アイスボックス", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/e08-050100-300.jpg" },
+                    { name: "寸胴鍋 28L", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00441-300.jpg" },
+                    { name: "長方形テーブル　ワイド", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00119-300.jpg" },
+                    { name: "長方形テーブル　シングル", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00118-300.jpg" },
+                ],
+            },
+            //---講義室------------------------------------------------------------------
+            {
+                name: "作曲研究部",
+                genre: "講義室",
+                items: [
+                    { name: "ピンスポット用自動ホイル", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds0b-00007-main.jpg" },
+                    { name: "ピンスポットライト", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds0b-00006-main.jpg" },
+                    { name: "プロジェクター＆スクリーン30名用セット（ワイド対応）", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000402-500b.jpg" },
+                    { name: "有線マイク", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds0a-00003-300.jpg" },
+                    { name: "ミラーボール（φ30cm）", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds0b-00015-300.jpg" },
+                ],
+            },
+            {
+                name: "鉄道研究部",
+                genre: "講義室",
+                items: [
+                    { name: "イレクターフェンス", quantity: 110, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000124-300.jpg" },
+                    { name: "長方形テーブル ワイド", quantity: 35, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00119-300.jpg" },
+                    { name: "プロジェクター＆スクリーン10名用セット（ワイド対応）", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000411-500.jpg" },
+                ],
+            },
+            {
+                name: "PSE 平和的社会的",
+                genre: "講義室",
+                items: [
+                    { name: "EZフレームパネル W900×H2100", quantity: 12, imageUrl: "https://event.kasite.net/sys_img/item/image1/e10-124279-300.jpg" },
+                    { name: "パネルベース", quantity: 24, imageUrl: "https://event.kasite.net/sys_img/item/image1/e10-124106-300.jpg" },
+                ],
+            },
+            {
+                name: "漫画研究会",
+                genre: "講義室",
+                items: [
+                    { name: "AVテーブル用サイドクロス 大", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00551-300.jpg" },
+                    { name: "衝立三折れ", quantity: 6, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00180-300.jpg" },
+                ],
+            },
+            {
+                name: "健康医療科学部　看護学科",
+                genre: "講義室",
+                items: [
+                    { name: "業務用精密体重計", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000298-300.jpg" },
+                    { name: "身長計", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000297-300.jpg" },
+                ],
+            },
+            {
+                name: "看護学科（国際交流企画）",
+                genre: "講義室",
+                items: [
+                    { name: "EZフレームパネル W900×H2100", quantity: 4, imageUrl: "https://event.kasite.net/sys_img/item/image1/e10-124279-300.jpg" },
+                    { name: "パネルベース", quantity: 8, imageUrl: "https://event.kasite.net/sys_img/item/image1/e10-124106-300.jpg" },
+                
+                ],
+            },
+            {
+                name: "放送研究部",
+                genre: "講義室",
+                items: [
+                    { name: "クロススクリーン（3連）ブルー", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00177-300.jpg" },
+                ],
+            },
+            {
+                name: "北本研究室",
+                genre: "講義室",
+                items: [
+                    { name: "コンパクトミスト発生機", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000152-300.jpg" },
+                    { name: "パーライト TOUR Z CAM LED", quantity: 3, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000375_500.jpg" },
+                    { name: "プラスチックチェーン", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000126-main.jpg" },
+                    { name: "プラスチック製パーテーション", quantity: 10, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000125-main.jpg" },
+                    { name: "プロジェクター（4000lm)WXGA対応", quantity: 3, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000405-500.jpg" },
+                    { name: "スピーカースタンド（ボーズ802・ラプソン用）", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds0a-00021-300.jpg" },
+                    { name: "無指向性スピーカーラプソン", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000383-500-01.jpg" },
+                    { name: "パワードミキサー6ch", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds0a-00066-300.jpg" },
+                ],
+            },
+            {
+                name: "Creatopia～メディアデザインサークル～",
+                genre: "講義室",
+                items: [
+                    { name: "ヴァンテアンパネル W1200×H1800", quantity: 4, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000116-300.jpg" },
+                    { name: "ワイヤーフック", quantity: 8, imageUrl: "https://event.kasite.net/sys_img/item/image1/e10-120980-300.jpg" },
+                    { name: "ヴァンテアンベース", quantity: 6, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00535-300.jpg" },
+                    { name: "EZ用アームライト", quantity: 4, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000115_500.jpg" },
+                ],
+            },
+            {
+                name: "air team",
+                genre: "講義室",
+                items: [
+                    { name: "EZフレームパネル W900×H2100", quantity: 10, imageUrl: "https://event.kasite.net/sys_img/item/image1/e10-124279-300.jpg" },
+                    { name: "EZ用アームライト", quantity: 20, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000115_500.jpg" },
+                    { name: "パネルベース", quantity: 11, imageUrl: "https://event.kasite.net/sys_img/item/image1/e10-124106-300.jpg" },
+                    
+                ],
+            },
+            {
+                name: "山門・狩野研究室（KAIT Racing）",
+                genre: "講義室",
+                items: [
+                    { name: "ディスプレイスタンド(W1142×D760×H1865mm)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds0c-00043-300.jpg" },
+                    { name: "プラズマディスプレイ 50型", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds0c-00042-300.jpg" },
+               
+                ],
+            },
+            //---学内企画-----------------------------------------------------------------------------------
+            {
+                name: "縁日",
+                genre: "学内企画",
+                items: [
+                    { name: "コルク銃", quantity: 4, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00472-300.jpg" },
+                    { name: "ジャンボ輪投げ（12本ポール）", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds05-00072-300.jpg" },
+                    { name: "抽選器大（1000発用）", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000172-300.jpg" },
+                    { name: "抽選玉", quantity: 10, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000174-300.jpg" },
+                    { name: "カネ", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000175-300.jpg" },
+                    { name: "横幕3K（白）", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "横幕（透明）　２K", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                    { name: "横幕（透明）　５K", quantity: 2, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
+                ],
+            },
+            {
+                name: "ステージイベント",
+                genre: "学内企画",
+                items: [
+                    { name: "アイスボックス", quantity: 3, imageUrl: "https://event.kasite.net/sys_img/item/image1/e08-050100-300.jpg" },
+                    { name: "EZフレームパネル W900×H2100", quantity: 40, imageUrl: "https://event.kasite.net/sys_img/item/image1/e10-124279-300.jpg" },
+                    { name: "パネルベース", quantity: 41, imageUrl: "https://event.kasite.net/sys_img/item/image1/e10-124106-300.jpg" },
+                    { name: "簡易ステージセット（アルミステージ）", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000350-500.jpg" },
+                ],
+            },
+            {
+                name: "ビンゴ",
+                genre: "学内企画",
+                items: [
+                    { name: "カラーコーン用バー", quantity: 20, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00085-main.jpg" },
+                ],
+            },
+            {
+                name: "テンプレ",
+                genre: "学内企画",
+                items: [
+                    { name: "", quantity: 1, imageUrl: "" },
+                    { name: "", quantity: 1, imageUrl: "" },
+                    { name: "", quantity: 1, imageUrl: "" },
+                    { name: "", quantity: 1, imageUrl: "" },
+                ],
+            },
+
+            // ... 他の団体のデータ ...
+        ];
+
+        const genres = ["飲食", "講義室", "学内企画"];
+        let currentGenre = "飲食";
+
+        function renderOrganizations(genre, searchTerm = '') {
+            const container = document.getElementById('genres-container');
+            container.innerHTML = '';
+
+            const genreSection = document.createElement('div');
+            genreSection.className = 'genre-section active';
+            genreSection.setAttribute('role', 'tabpanel');
+            genreSection.innerHTML = `<h2 class="genre-title">${genre}</h2>`;
+
+            const genreOrgs = organizations.filter(org => 
+                org.genre === genre && org.name.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+
+            genreOrgs.forEach(org => {
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <div class="card-header">
+                        <h3 class="card-title">${org.name}</h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="items-grid">
+                            ${org.items.map(item => `
+                                <div class="item">
+                                    <img src="${item.imageUrl}" alt="${item.name}">
+                                    <p class="item-name">${item.name}</p>
+                                    <p class="item-quantity">${item.quantity}個</p>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+                genreSection.appendChild(card);
+            });
+
+            container.appendChild(genreSection);
+        }
+
+        function updateDisplay() {
+            const searchTerm = document.getElementById('search').value;
+            renderOrganizations(currentGenre, searchTerm);
+        }
+
+        document.getElementById('search').addEventListener('input', updateDisplay);
+
+        document.querySelectorAll('.genre-button').forEach(button => {
+            button.addEventListener('click', function() {
+                currentGenre = this.dataset.genre;
+                document.querySelectorAll('.genre-button').forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.setAttribute('aria-selected', 'false');
+                });
+                this.classList.add('active');
+                this.setAttribute('aria-selected', 'true');
+                updateDisplay();
+            });
+        });
+
+        // 初期表示
+        updateDisplay();
+    </script>
+</body>
+</html>
