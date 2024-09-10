@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ジャンル別レンタル品リスト</title>
+    <title>ジャンル別レンタル品リスト（合計含む）</title>
     <meta property="og:title" content="レンタル品リスト">
     
     <style>
@@ -21,10 +21,11 @@
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
+            flex-wrap: wrap;
         }
         .genre-button {
             padding: 10px 20px;
-            margin: 0 10px;
+            margin: 5px;
             font-size: 16px;
             cursor: pointer;
             background-color: #007bff;
@@ -113,6 +114,7 @@
             <button class="genre-button active" data-genre="飲食" role="tab" aria-selected="true">飲食</button>
             <button class="genre-button" data-genre="講義室" role="tab" aria-selected="false">講義室</button>
             <button class="genre-button" data-genre="学内企画" role="tab" aria-selected="false">学内企画</button>
+            <button class="genre-button" data-genre="合計" role="tab" aria-selected="false">合計</button>
         </div>
         <input type="text" id="search" placeholder="団体名で検索..." aria-label="団体名で検索">
         <div id="genres-container"></div>
@@ -121,8 +123,7 @@
     <script>
         // 仮のデータ（実際には多くの団体のデータを用意します）
         const organizations = [
-            
-            {
+        {
                 name: "イベント局/飲食担当",
                 genre: "飲食",
                 items: [
@@ -350,7 +351,7 @@
                 genre: "講義室",
                 items: [
                     { name: "イレクターフェンス", quantity: 110, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000124-300.jpg" },
-                    { name: "長方形テーブル ワイド", quantity: 35, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00119-300.jpg" },
+                    { name: "長方形テーブル　ワイド", quantity: 35, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00119-300.jpg" },
                     { name: "プロジェクター＆スクリーン10名用セット（ワイド対応）", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000411-500.jpg" },
                 ],
             },
@@ -479,12 +480,24 @@
                     { name: "", quantity: 1, imageUrl: "" },
                 ],
             },
-
-            // ... 他の団体のデータ ...
         ];
 
-        const genres = ["飲食", "講義室", "学内企画"];
+        const genres = ["飲食", "講義室", "学内企画", "合計"];
         let currentGenre = "飲食";
+
+        function calculateTotalItems() {
+            const totalItems = {};
+            organizations.forEach(org => {
+                org.items.forEach(item => {
+                    if (totalItems[item.name]) {
+                        totalItems[item.name].quantity += item.quantity;
+                    } else {
+                        totalItems[item.name] = { ...item };
+                    }
+                });
+            });
+            return Object.values(totalItems);
+        }
 
         function renderOrganizations(genre, searchTerm = '') {
             const container = document.getElementById('genres-container');
@@ -495,20 +508,17 @@
             genreSection.setAttribute('role', 'tabpanel');
             genreSection.innerHTML = `<h2 class="genre-title">${genre}</h2>`;
 
-            const genreOrgs = organizations.filter(org => 
-                org.genre === genre && org.name.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-
-            genreOrgs.forEach(org => {
+            if (genre === "合計") {
+                const totalItems = calculateTotalItems();
                 const card = document.createElement('div');
                 card.className = 'card';
                 card.innerHTML = `
                     <div class="card-header">
-                        <h3 class="card-title">${org.name}</h3>
+                        <h3 class="card-title">全レンタル品合計</h3>
                     </div>
                     <div class="card-content">
                         <div class="items-grid">
-                            ${org.items.map(item => `
+                            ${totalItems.map(item => `
                                 <div class="item">
                                     <img src="${item.imageUrl}" alt="${item.name}">
                                     <p class="item-name">${item.name}</p>
@@ -519,7 +529,33 @@
                     </div>
                 `;
                 genreSection.appendChild(card);
-            });
+            } else {
+                const genreOrgs = organizations.filter(org => 
+                    org.genre === genre && org.name.toLowerCase().includes(searchTerm.toLowerCase())
+                );
+
+                genreOrgs.forEach(org => {
+                    const card = document.createElement('div');
+                    card.className = 'card';
+                    card.innerHTML = `
+                        <div class="card-header">
+                            <h3 class="card-title">${org.name}</h3>
+                        </div>
+                        <div class="card-content">
+                            <div class="items-grid">
+                                ${org.items.map(item => `
+                                    <div class="item">
+                                        <img src="${item.imageUrl}" alt="${item.name}">
+                                        <p class="item-name">${item.name}</p>
+                                        <p class="item-quantity">${item.quantity}個</p>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        </div>
+                    `;
+                    genreSection.appendChild(card);
+                });
+            }
 
             container.appendChild(genreSection);
         }
