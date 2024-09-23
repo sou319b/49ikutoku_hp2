@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ジャンル別レンタル品リスト（合計含む）</title>
     <meta property="og:title" content="レンタル品リスト">
-    
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,16 +14,19 @@
             padding: 20px;
             background-color: #f0f0f0;
         }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
         }
+
         .genre-buttons {
             display: flex;
             justify-content: center;
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
+
         .genre-button {
             padding: 10px 20px;
             margin: 5px;
@@ -34,12 +38,15 @@
             border-radius: 5px;
             transition: background-color 0.3s;
         }
+
         .genre-button:hover {
             background-color: #0056b3;
         }
+
         .genre-button.active {
             background-color: #0056b3;
         }
+
         input[type="text"] {
             width: 100%;
             padding: 10px;
@@ -47,48 +54,58 @@
             border: 1px solid #ddd;
             border-radius: 4px;
         }
+
         .genre-section {
             display: none;
         }
+
         .genre-section.active {
             display: block;
         }
+
         .genre-title {
             font-size: 24px;
             margin-bottom: 20px;
             padding-bottom: 10px;
             border-bottom: 2px solid #007bff;
         }
+
         .card {
             background-color: white;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             margin-bottom: 20px;
             overflow: hidden;
         }
+
         .card-header {
             background-color: #f8f8f8;
             padding: 15px;
             border-bottom: 1px solid #eee;
         }
+
         .card-title {
             margin: 0;
             font-size: 18px;
         }
+
         .card-content {
             padding: 15px;
         }
+
         .items-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
             gap: 15px;
         }
+
         .item {
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
         }
+
         .item img {
             width: 80px;
             height: 80px;
@@ -96,11 +113,13 @@
             border-radius: 4px;
             margin-bottom: 8px;
         }
+
         .item-name {
             font-weight: bold;
             font-size: 14px;
             margin: 0;
         }
+
         .item-quantity {
             font-size: 12px;
             color: #666;
@@ -108,6 +127,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="genre-buttons" role="tablist">
@@ -123,7 +143,7 @@
     <script>
         // 仮のデータ（実際には多くの団体のデータを用意します）
         const organizations = [
-        {
+            {
                 name: "イベント局/飲食担当",
                 genre: "飲食",
                 items: [
@@ -146,7 +166,7 @@
                     { name: "横幕 3k(白)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00052-300.jpg" },
                     { name: "消火器", quantity: 1, imageUrl: "https://www.nohmi.co.jp/product/fe/img/006.jpg" },
                     { name: "台付鉄板焼器", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00419-300.jpg" },
-                  
+
                 ],
             },
             {
@@ -385,7 +405,7 @@
                 items: [
                     { name: "EZフレームパネル W900×H2100", quantity: 4, imageUrl: "https://event.kasite.net/sys_img/item/image1/e10-124279-300.jpg" },
                     { name: "パネルベース", quantity: 8, imageUrl: "https://event.kasite.net/sys_img/item/image1/e10-124106-300.jpg" },
-                
+
                 ],
             },
             {
@@ -426,7 +446,7 @@
                     { name: "EZフレームパネル W900×H2100", quantity: 10, imageUrl: "https://event.kasite.net/sys_img/item/image1/e10-124279-300.jpg" },
                     { name: "EZ用アームライト", quantity: 20, imageUrl: "https://event.kasite.net/sys_img/item/image1/item000115_500.jpg" },
                     { name: "パネルベース", quantity: 11, imageUrl: "https://event.kasite.net/sys_img/item/image1/e10-124106-300.jpg" },
-                    
+
                 ],
             },
             {
@@ -435,7 +455,7 @@
                 items: [
                     { name: "ディスプレイスタンド(W1142×D760×H1865mm)", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds0c-00043-300.jpg" },
                     { name: "プラズマディスプレイ 50型", quantity: 1, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds0c-00042-300.jpg" },
-               
+
                 ],
             },
             //---学内企画-----------------------------------------------------------------------------------
@@ -470,7 +490,7 @@
                     { name: "カラーコーン用バー", quantity: 20, imageUrl: "https://event.kasite.net/sys_img/item/image1/ds08-00085-main.jpg" },
                 ],
             },
-            
+
         ];
 
         const genres = ["飲食", "講義室", "学内企画", "合計"];
@@ -521,7 +541,7 @@
                 `;
                 genreSection.appendChild(card);
             } else {
-                const genreOrgs = organizations.filter(org => 
+                const genreOrgs = organizations.filter(org =>
                     org.genre === genre && org.name.toLowerCase().includes(searchTerm.toLowerCase())
                 );
 
@@ -529,21 +549,21 @@
                     const card = document.createElement('div');
                     card.className = 'card';
                     card.innerHTML = `
-                        <div class="card-header">
-                            <h3 class="card-title">${org.name}</h3>
-                        </div>
-                        <div class="card-content">
-                            <div class="items-grid">
-                                ${org.items.map(item => `
-                                    <div class="item">
-                                        <img src="${item.imageUrl}" alt="${item.name}">
-                                        <p class="item-name">${item.name}</p>
-                                        <p class="item-quantity">${item.quantity}個</p>
-                                    </div>
-                                `).join('')}
-                            </div>
-                        </div>
-                    `;
+<div class="card-header">
+<h3 class="card-title">${org.name}</h3>
+</div>
+<div class="card-content">
+<div class="items-grid">
+    ${org.items.map(item => `
+        <div class="item">
+            <img src="${item.imageUrl}" alt="${item.name}">
+            <p class="item-name">${item.name}</p>
+            <p class="item-quantity">${item.quantity}個</p>
+        </div>
+    `).join('')}
+</div>
+</div>
+`;
                     genreSection.appendChild(card);
                 });
             }
@@ -559,7 +579,7 @@
         document.getElementById('search').addEventListener('input', updateDisplay);
 
         document.querySelectorAll('.genre-button').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function () {
                 currentGenre = this.dataset.genre;
                 document.querySelectorAll('.genre-button').forEach(btn => {
                     btn.classList.remove('active');
@@ -575,4 +595,5 @@
         updateDisplay();
     </script>
 </body>
+
 </html>

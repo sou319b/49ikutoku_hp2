@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>購入品サマリー</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.4;
+            color: #333;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+        }
+        .tab button:hover {
+            background-color: #ddd;
+        }
+        .tab button.active {
+            background-color: #ccc;
+        }
+        .tabcontent {
+            display: none;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+        .search-container {
+            margin-bottom: 20px;
+        }
+        #searchInput {
+            width: 200px;
+            padding: 5px;
+        }
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+        }
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        .product-card img {
+            max-width: 100%;
+            height: auto;
+            cursor: pointer;
+        }
+        .product-card h3 {
+            font-size: 1.1em;
+            margin: 5px 0;
+            font-weight: bold;
+        }
+        .product-card .quantity {
+            font-weight: bold;
+            margin: 3px 0;
+        }
+        .product-card p {
+            margin: 3px 0;
+        }
+        @media (max-width: 600px) {
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>購入品サマリー</h1>
+
+    <div class="tab">
+        <button class="tablinks active" onclick="openCategory(event, '飲食')">飲食</button>
+        <button class="tablinks" onclick="openCategory(event, 'ビンゴ')">ビンゴ</button>
+        <button class="tablinks" onclick="openCategory(event, '縁日')">縁日</button>
+    </div>
+
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="商品を検索...">
+    </div>
+
+    <div id="飲食" class="tabcontent" style="display: block;">
+        <h2>飲食</h2>
+        <div id="飲食Grid" class="product-grid">
+            <!-- 商品データはJavaScriptで動的に追加されます -->
+        </div>
+    </div>
+
+    <div id="ビンゴ" class="tabcontent">
+        <h2>ビンゴ</h2>
+        <div id="ビンゴGrid" class="product-grid">
+            <!-- 商品データはJavaScriptで動的に追加されます -->
+        </div>
+    </div>
+
+    <div id="縁日" class="tabcontent">
+        <h2>縁日</h2>
+        <div id="縁日Grid" class="product-grid">
+            <!-- 商品データはJavaScriptで動的に追加されます -->
+        </div>
+    </div>
+
+    <div id="totalSummary">
+        <h2>合計金額</h2>
+        <table>
+            <tbody>
+                <tr>
+                    <td>飲食</td>
+                    <td id="飲食Total"></td>
+                </tr>
+                <tr>
+                    <td>ビンゴ</td>
+                    <td id="ビンゴTotal"></td>
+                </tr>
+                <tr>
+                    <td>縁日</td>
+                    <td id="縁日Total"></td>
+                </tr>
+                <tr>
+                    <td><strong>総合計</strong></td>
+                    <td id="grandTotal"><strong></strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="imageModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <img id="modalImage" src="" alt="商品画像" style="width:100%;">
+        </div>
+    </div>
+
+    <script>
+        // 商品データ
+        const items = [
+            { name: 'ジュース', quantity: 50, unitPrice: 100, category: '飲食', image: '/placeholder.svg?height=100&width=100', link: 'https://example.com/juice' },
+            { name: 'お菓子', quantity: 100, unitPrice: 50, category: '飲食', image: '/placeholder.svg?height=100&width=100', link: 'https://example.com/snacks' },
+            { name: 'ビンゴカード', quantity: 200, unitPrice: 20, category: 'ビンゴ', image: '/placeholder.svg?height=100&width=100', link: 'https://example.com/bingo' },
+            { name: 'ビンゴ景品', quantity: 30, unitPrice: 500, category: 'ビンゴ', image: '/placeholder.svg?height=100&width=100', link: 'https://example.com/prizes' },
+            { name: 'ヨーヨー風船', quantity: 300, unitPrice: 30, category: '縁日', image: '/placeholder.svg?height=100&width=100', link: 'https://example.com/balloons' },
+            { name: 'スーパーボール', quantity: 500, unitPrice: 10, category: '縁日', image: '/placeholder.svg?height=100&width=100', link: 'https://example.com/balls' },
+            { name: '', quantity: 1, unitPrice: 100, category: '飲食', image: '', link: '' },
+            { name: 'エンボス手袋(青)', quantity: 2, unitPrice: 100, category: '飲食', image: 'https://jp.daisonet.com/cdn/shop/products/5f864db173fd851cdce7cffa01147508_700x.jpg?v=1696468015', link: 'https://jp.daisonet.com/products/4550480350073?_pos=3&_sid=e1bda4b62&_ss=r' },
+            { name: 'S 字フック', quantity: 2, unitPrice: 100, category: '飲食', image: 'https://jp.daisonet.com/cdn/shop/products/1PYsGHLbGbNFED5j30fuIfEZ2fHEP33od_700x.jpg?v=1642141786', link: 'https://jp.daisonet.com/products/4997642165180?_pos=15&_sid=d66c0b48b&_ss=r' },
+            { name: 'カードリング', quantity: 3, unitPrice: 100, category: '飲食', image: 'https://jp.daisonet.com/cdn/shop/products/8c234ce916c791ba2df0b61cf0a0c132_700x.jpg?v=1685329395', link: 'https://jp.daisonet.com/products/4550480276465?_pos=1&_sid=c92711433&_ss=r' },
+            { name: '除菌シート', quantity: 5, unitPrice: 100, category: '飲食', image: 'https://jp.daisonet.com/cdn/shop/products/9cbe8d3c2f4e3e3467e8b21ed900c731_700x.jpg?v=1678938984', link: 'https://jp.daisonet.com/products/4550480325354?_pos=21&_sid=95c635178&_ss=r' },
+            { name: '不織布マスク２５枚（ホワイト、ふつう）', quantity: 3, unitPrice: 100, category: '飲食', image: 'https://jp.daisonet.com/cdn/shop/products/255d98d073d7a9deeb6edc35663ac313_700x.jpg?v=1687422932', link: 'https://jp.daisonet.com/products/4550480284279?_pos=7&_sid=25bbc2c57&_ss=r' },
+            { name: '', quantity: 1, unitPrice: 100, category: '飲食', image: '', link: '' },
+            { name: '', quantity: 1, unitPrice: 100, category: '飲食', image: '', link: '' },
+            { name: '', quantity: 1, unitPrice: 100, category: '飲食', image: '', link: '' },
+            { name: '', quantity: 1, unitPrice: 100, category: '飲食', image: '', link: '' },
+        ];
+
+        // 追加の商品データ
+        for (let i = 1; i <= 10; i++) {
+            items.push(
+                { name: `飲食品${i}`, quantity: 50 * i, unitPrice: 100 + i * 10, category: '飲食', image: '/placeholder.svg?height=100&width=100', link: `https://example.com/food${i}` },
+                { name: `ビンゴ商品${i}`, quantity: 20 * i, unitPrice: 200 + i * 20, category: 'ビンゴ', image: '/placeholder.svg?height=100&width=100', link: `https://example.com/bingo${i}` },
+                { name: `縁日商品${i}`, quantity: 30 * i, unitPrice: 50 + i * 5, category: '縁日', image: '/placeholder.svg?height=100&width=100', link: `https://example.com/festival${i}` }
+            );
+        }
+
+        let currentCategory = '飲食';
+
+        function openCategory(evt, categoryName) {
+            const tabcontent = document.getElementsByClassName("tabcontent");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            const tablinks = document.getElementsByClassName("tablinks");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(categoryName).style.display = "block";
+            evt.currentTarget.className += " active";
+            currentCategory = categoryName;
+            renderItems();
+        }
+
+        function renderItems() {
+            const filteredItems = items.filter(item => item.category === currentCategory);
+            const grid = document.getElementById(`${currentCategory}Grid`);
+            grid.innerHTML = '';
+
+            filteredItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" onclick="openModal('${item.image}', '${item.link}')">
+                    <h3>${item.name}</h3>
+                    <p class="quantity">個数: ${item.quantity}</p>
+                    <p>単価: ¥${item.unitPrice.toLocaleString()}</p>
+                    <p>合計: ¥${(item.quantity * item.unitPrice).toLocaleString()}</p>
+                `;
+                grid.appendChild(card);
+            });
+
+            updateTotals();
+        }
+
+        function updateTotals() {
+            const categories = ['飲食', 'ビンゴ', '縁日'];
+            let grandTotal = 0;
+
+            categories.forEach(category => {
+                const categoryTotal = items
+                    .filter(item => item.category === category)
+                    .reduce((sum, item) => sum + item.quantity * item.unitPrice, 0);
+                document.getElementById(`${category}Total`).textContent = `¥${categoryTotal.toLocaleString()}`;
+                grandTotal += categoryTotal;
+            });
+
+            document.getElementById('grandTotal').textContent = `¥${grandTotal.toLocaleString()}`;
+        }
+
+        function openModal(imageSrc, link) {
+            const modal = document.getElementById('imageModal');
+            const modalImg = document.getElementById('modalImage');
+            modal.style.display = "block";
+            modalImg.src = imageSrc;
+            modalImg.onclick = () => window.open(link, '_blank');
+        }
+
+        const closeBtn = document.getElementsByClassName("close")[0];
+        closeBtn.onclick = () => {
+            document.getElementById('imageModal').style.display = "none";
+        }
+
+        window.onclick = (event) => {
+            const modal = document.getElementById('imageModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredItems = items.filter(item => 
+                item.category === currentCategory && 
+                item.name.toLowerCase().includes(searchTerm)
+            );
+            renderFilteredItems(filteredItems);
+        });
+
+        function renderFilteredItems(filteredItems) {
+            const grid = document.getElementById(`${currentCategory}Grid`);
+            grid.innerHTML = '';
+
+            filteredItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" onclick="openModal('${item.image}', '${item.link}')">
+                    <h3>${item.name}</h3>
+                    <p class="quantity">個数: ${item.quantity}</p>
+                    <p>単価: ¥${item.unitPrice.toLocaleString()}</p>
+                    <p>合計: ¥${(item.quantity * item.unitPrice).toLocaleString()}</p>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // 初期表示
+        renderItems();
+    </script>
+</body>
+</html>
