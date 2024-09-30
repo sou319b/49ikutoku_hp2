@@ -120,6 +120,7 @@
         <button class="tablinks" onclick="openCategory(event, 'ビンゴ')">ビンゴ</button>
         <button class="tablinks" onclick="openCategory(event, '縁日')">縁日</button>
         <button class="tablinks" onclick="openCategory(event, 'ステージ')">ステージ</button>
+        <button class="tablinks" onclick="openCategory(event, '合計')">合計</button>
     </div>
 
     <div class="search-container">
@@ -147,8 +148,14 @@
         </div>
     </div>
     <div id="ステージ" class="tabcontent">
-        <h2>縁日</h2>
+        <h2>ステージ</h2>
         <div id="ステージGrid" class="product-grid">
+            <!-- 商品データはJavaScriptで動的に追加されます -->
+        </div>
+    </div>
+    <div id="合計" class="tabcontent">
+        <h2>合計</h2>
+        <div id="合計Grid" class="product-grid">
             <!-- 商品データはJavaScriptで動的に追加されます -->
         </div>
     </div>
@@ -248,7 +255,7 @@
         }
 
         function renderItems() {
-            const filteredItems = items.filter(item => item.category === currentCategory);
+            const filteredItems = currentCategory === '合計' ? items : items.filter(item => item.category === currentCategory);
             const grid = document.getElementById(`${currentCategory}Grid`);
             grid.innerHTML = '';
 
@@ -261,6 +268,7 @@
                     <p class="quantity">個数: ${item.quantity}</p>
                     <p>単価: ¥${item.unitPrice.toLocaleString()}</p>
                     <p>合計: ¥${(item.quantity * item.unitPrice).toLocaleString()}</p>
+                    <p>企画: ${item.category}</p>
                 `;
                 grid.appendChild(card);
             });
@@ -325,10 +333,24 @@
                     <p class="quantity">個数: ${item.quantity}</p>
                     <p>単価: ¥${item.unitPrice.toLocaleString()}</p>
                     <p>合計: ¥${(item.quantity * item.unitPrice).toLocaleString()}</p>
+                    <p>企画: ${item.category}</p>
                 `;
                 grid.appendChild(card);
             });
+        
         }
+
+
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredItems = currentCategory === '合計' 
+                ? items.filter(item => item.name.toLowerCase().includes(searchTerm))
+                : items.filter(item => 
+                    item.category === currentCategory && 
+                    item.name.toLowerCase().includes(searchTerm)
+                );
+            renderFilteredItems(filteredItems);
+        });
 
         //ここから追加
         

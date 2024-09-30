@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <!-- 既存のhead内容はそのまま -->
+</head>
+<body>
+    <h1>購入品ダイソー</h1>
+
+    <div class="tab">
+        <button class="tablinks active" onclick="openCategory(event, '飲食')">飲食</button>
+        <button class="tablinks" onclick="openCategory(event, 'ビンゴ')">ビンゴ</button>
+        <button class="tablinks" onclick="openCategory(event, '縁日')">縁日</button>
+        <button class="tablinks" onclick="openCategory(event, 'ステージ')">ステージ</button>
+        <button class="tablinks" onclick="openCategory(event, '合計')">合計</button>
+    </div>
+
+    <!-- 既存のカテゴリーコンテンツ -->
+
+    <div id="合計" class="tabcontent">
+        <h2>合計</h2>
+        <div id="合計Grid" class="product-grid">
+            <!-- 商品データはJavaScriptで動的に追加されます -->
+        </div>
+    </div>
+
+    <!-- 既存のtotalSummaryとimageModal -->
+
+    <script>
+        // 既存の商品データ
+
+        let currentCategory = '飲食';
+
+        function openCategory(evt, categoryName) {
+            const tabcontent = document.getElementsByClassName("tabcontent");
+            for (let i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            const tablinks = document.getElementsByClassName("tablinks");
+            for (let i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(categoryName).style.display = "block";
+            evt.currentTarget.className += " active";
+            currentCategory = categoryName;
+            renderItems();
+        }
+
+        function renderItems() {
+            const filteredItems = currentCategory === '合計' ? items : items.filter(item => item.category === currentCategory);
+            const grid = document.getElementById(`${currentCategory}Grid`);
+            grid.innerHTML = '';
+
+            filteredItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" onclick="openModal('${item.image}', '${item.link}')">
+                    <h3>${item.name}</h3>
+                    <p class="quantity">個数: ${item.quantity}</p>
+                    <p>単価: ¥${item.unitPrice.toLocaleString()}</p>
+                    <p>合計: ¥${(item.quantity * item.unitPrice).toLocaleString()}</p>
+                    <p>カテゴリー: ${item.category}</p>
+                `;
+                grid.appendChild(card);
+            });
+
+            updateTotals();
+        }
+
+        // 既存の関数（updateTotals, openModal, etc.）
+
+        function renderFilteredItems(filteredItems) {
+            const grid = document.getElementById(`${currentCategory}Grid`);
+            grid.innerHTML = '';
+
+            filteredItems.forEach(item => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" onclick="openModal('${item.image}', '${item.link}')">
+                    <h3>${item.name}</h3>
+                    <p class="quantity">個数: ${item.quantity}</p>
+                    <p>単価: ¥${item.unitPrice.toLocaleString()}</p>
+                    <p>合計: ¥${(item.quantity * item.unitPrice).toLocaleString()}</p>
+                    <p>カテゴリー: ${item.category}</p>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        document.getElementById('searchInput').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const filteredItems = currentCategory === '合計' 
+                ? items.filter(item => item.name.toLowerCase().includes(searchTerm))
+                : items.filter(item => 
+                    item.category === currentCategory && 
+                    item.name.toLowerCase().includes(searchTerm)
+                );
+            renderFilteredItems(filteredItems);
+        });
+
+        // 初期表示
+        renderItems();
+    </script>
+</body>
+</html>
