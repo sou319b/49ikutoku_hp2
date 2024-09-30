@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>購入品サマリー</title>
+    <title>購入品ダイソー</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -113,7 +113,7 @@
     </style>
 </head>
 <body>
-    <h1>購入品サマリー</h1>
+    <h1>購入品ダイソー</h1>
 
     <div class="tab">
         <button class="tablinks active" onclick="openCategory(event, '飲食')">飲食</button>
@@ -180,32 +180,32 @@
     <script>
         // 商品データ
         const items = [
-            { name: 'ジュース', quantity: 50, unitPrice: 100, category: '飲食', image: '/placeholder.svg?height=100&width=100', link: 'https://example.com/juice' },
-            { name: 'お菓子', quantity: 100, unitPrice: 50, category: '飲食', image: '/placeholder.svg?height=100&width=100', link: 'https://example.com/snacks' },
-            { name: 'ビンゴカード', quantity: 200, unitPrice: 20, category: 'ビンゴ', image: '/placeholder.svg?height=100&width=100', link: 'https://example.com/bingo' },
-            { name: 'ビンゴ景品', quantity: 30, unitPrice: 500, category: 'ビンゴ', image: '/placeholder.svg?height=100&width=100', link: 'https://example.com/prizes' },
-            { name: 'ヨーヨー風船', quantity: 300, unitPrice: 30, category: '縁日', image: '/placeholder.svg?height=100&width=100', link: 'https://example.com/balloons' },
-            { name: 'スーパーボール', quantity: 500, unitPrice: 10, category: '縁日', image: '/placeholder.svg?height=100&width=100', link: 'https://example.com/balls' },
-            { name: '', quantity: 1, unitPrice: 100, category: '飲食', image: '', link: '' },
+           
+            { name: 'なし', quantity: 0, unitPrice: 0, category: 'ビンゴ', image: '/placeholder.svg?height=100&width=100', link: 'https://example.com/bingo' },
+            
+           
             { name: 'エンボス手袋(青)', quantity: 2, unitPrice: 100, category: '飲食', image: 'https://jp.daisonet.com/cdn/shop/products/5f864db173fd851cdce7cffa01147508_700x.jpg?v=1696468015', link: 'https://jp.daisonet.com/products/4550480350073?_pos=3&_sid=e1bda4b62&_ss=r' },
             { name: 'S 字フック', quantity: 2, unitPrice: 100, category: '飲食', image: 'https://jp.daisonet.com/cdn/shop/products/1PYsGHLbGbNFED5j30fuIfEZ2fHEP33od_700x.jpg?v=1642141786', link: 'https://jp.daisonet.com/products/4997642165180?_pos=15&_sid=d66c0b48b&_ss=r' },
             { name: 'カードリング', quantity: 3, unitPrice: 100, category: '飲食', image: 'https://jp.daisonet.com/cdn/shop/products/8c234ce916c791ba2df0b61cf0a0c132_700x.jpg?v=1685329395', link: 'https://jp.daisonet.com/products/4550480276465?_pos=1&_sid=c92711433&_ss=r' },
             { name: '除菌シート', quantity: 5, unitPrice: 100, category: '飲食', image: 'https://jp.daisonet.com/cdn/shop/products/9cbe8d3c2f4e3e3467e8b21ed900c731_700x.jpg?v=1678938984', link: 'https://jp.daisonet.com/products/4550480325354?_pos=21&_sid=95c635178&_ss=r' },
             { name: '不織布マスク２５枚（ホワイト、ふつう）', quantity: 3, unitPrice: 100, category: '飲食', image: 'https://jp.daisonet.com/cdn/shop/products/255d98d073d7a9deeb6edc35663ac313_700x.jpg?v=1687422932', link: 'https://jp.daisonet.com/products/4550480284279?_pos=7&_sid=25bbc2c57&_ss=r' },
-            { name: '', quantity: 1, unitPrice: 100, category: '飲食', image: '', link: '' },
-            { name: '', quantity: 1, unitPrice: 100, category: '飲食', image: '', link: '' },
-            { name: '', quantity: 1, unitPrice: 100, category: '飲食', image: '', link: '' },
-            { name: '', quantity: 1, unitPrice: 100, category: '飲食', image: '', link: '' },
+            
+            { name: 'ペーパーカップ（２０個、２７５ｍＬ）', quantity: 1, unitPrice: 110, category: '縁日', image: 'https://jp.daisonet.com/cdn/shop/products/c01e84d73363b1ef570d1a8e3ea214aa_700x.jpg?v=1687412925', link: 'https://jp.daisonet.com/products/4550480278513?_pos=38&_sid=2b40b3a7e&_ss=r' },
+            { name: 'ボタンが大きいキッチンタイマー', quantity: 2, unitPrice: 110, category: '縁日', image: 'https://jp.daisonet.com/cdn/shop/products/4549131902464_10_fb081ac1-562a-414c-9ee7-f0b39197c8a6_700x.jpg?v=1641449566', link: 'https://jp.daisonet.com/products/4549131902464?_pos=11&_sid=9facec81f&_ss=r' },
+            { name: 'カウンター', quantity: 1, unitPrice: 110, category: '縁日', image: 'https://jp.daisonet.com/cdn/shop/products/1FapZm8kxkB6z1gonXFpYRlr-1bjp6O0E_700x.jpg?v=1625047058', link: 'https://jp.daisonet.com/products/4549131424034' },
+            { name: 'スタンプパッド 赤', quantity: 9, unitPrice: 110, category: '縁日', image: 'https://jp.daisonet.com/cdn/shop/products/1vqskOwAtk9BFlqAYagq79UBaurZj88eD_700x.jpg?v=1620212122', link: 'https://jp.daisonet.com/products/4994163284413?_pos=12&_sid=b3eb65a74&_ss=r' },
+           
+            
         ];
 
         // 追加の商品データ
-        for (let i = 1; i <= 10; i++) {
-            items.push(
-                { name: `飲食品${i}`, quantity: 50 * i, unitPrice: 100 + i * 10, category: '飲食', image: '/placeholder.svg?height=100&width=100', link: `https://example.com/food${i}` },
-                { name: `ビンゴ商品${i}`, quantity: 20 * i, unitPrice: 200 + i * 20, category: 'ビンゴ', image: '/placeholder.svg?height=100&width=100', link: `https://example.com/bingo${i}` },
-                { name: `縁日商品${i}`, quantity: 30 * i, unitPrice: 50 + i * 5, category: '縁日', image: '/placeholder.svg?height=100&width=100', link: `https://example.com/festival${i}` }
-            );
-        }
+        // for (let i = 1; i <= 10; i++) {
+        //     items.push(
+        //         { name: `飲食品${i}`, quantity: 50 * i, unitPrice: 100 + i * 10, category: '飲食', image: '/placeholder.svg?height=100&width=100', link: `https://example.com/food${i}` },
+        //         { name: `ビンゴ商品${i}`, quantity: 20 * i, unitPrice: 200 + i * 20, category: 'ビンゴ', image: '/placeholder.svg?height=100&width=100', link: `https://example.com/bingo${i}` },
+        //         { name: `縁日商品${i}`, quantity: 30 * i, unitPrice: 50 + i * 5, category: '縁日', image: '/placeholder.svg?height=100&width=100', link: `https://example.com/festival${i}` }
+        //     );
+        // }
 
         let currentCategory = '飲食';
 
