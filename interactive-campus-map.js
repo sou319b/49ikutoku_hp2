@@ -1,15 +1,14 @@
-// データ定義
 const areas = [
 
-  {
-    id: "①",
-    name: "K1号館",
-    coords: [0.87, 1.1, 0.35, 0.50],
+  { 
+    id: "①", 
+    name: "K1号館", 
+    coords: [0.87, 1.1, 0.35, 0.50], 
     info: [
       {
         floor: "1階",
         rooms: [
-          { number: "106", name: "ソフトウェア工房" },
+          { number: "106", name: "ソフトウェア工房" },   
         ]
       },
       {
@@ -30,11 +29,11 @@ const areas = [
     ],
     description: ""
   },
-
-
-  {
-    id: "②",
-    name: "K2号館",
+  
+  
+  { 
+    id: "②", 
+    name: "K2号館", 
     coords: [0.42, 0.8, 0.5, 0.85],
     info: [
       {
@@ -47,9 +46,9 @@ const areas = [
     ],
     description: ""
   },
-  {
-    id: "③",
-    name: "K3号館",
+  { 
+    id: "③", 
+    name: "K3号館", 
     coords: [0.7, 0.7, 0.8, 0.85],
     info: [
       {
@@ -108,15 +107,15 @@ const areas = [
     ],
     description: ""
   },
-  {
-    id: "④",
-    name: "K4号館",
+  { 
+    id: "④", 
+    name: "K4号館", 
     coords: [0.6, 0.55, 0.85, 0.7],
     info: [
       {
         floor: "1階",
         rooms: [
-
+         
           { number: "101・103", name: "健康医療科学部　看護学科" },
           { number: "101・103", name: "看護学科教員企画（国際交流企画）" }
         ]
@@ -125,15 +124,15 @@ const areas = [
         floor: "3階",
         rooms: [
           { number: "301", name: "臨床工学科" }
-
+         
         ]
       }
     ],
     description: ""
   },
-  {
-    id: "よ",
-    name: "図書館",
+  { 
+    id: "よ", 
+    name: "図書館", 
     coords: [0.75, 0.55, 0.85, 0.7],
     info: [
       {
@@ -153,9 +152,9 @@ const areas = [
     ],
     description: "図書館は24時間開館しており、豊富な蔵書と快適な学習環境を提供しています。"
   },
-  {
-    id: "⑤",
-    name: "体育館",
+  { 
+    id: "⑤", 
+    name: "体育館", 
     coords: [0.2, 0.5, 0.35, 0.65],
     info: [
       {
@@ -175,9 +174,9 @@ const areas = [
     ],
     description: "体育館では体育の授業や各種スポーツ大会が開催されます。"
   },
-  {
-    id: "⑥",
-    name: "学生会館",
+  { 
+    id: "⑥", 
+    name: "学生会館", 
     coords: [0.15, 0.7, 0.25, 0.85],
     info: [
       {
@@ -197,9 +196,9 @@ const areas = [
     ],
     description: "学生会館は学生生活の中心となる施設です。"
   },
-  {
-    id: "⑦",
-    name: "食堂",
+  { 
+    id: "⑦", 
+    name: "食堂", 
     coords: [0.3, 0.75, 0.4, 0.85],
     info: [
       {
@@ -212,9 +211,9 @@ const areas = [
     ],
     description: "食堂では多様なメニューを提供しており、学生や教職員の憩いの場となっています。"
   },
-  {
-    id: "⑧",
-    name: "情報センター",
+  { 
+    id: "⑧", 
+    name: "情報センター", 
     coords: [0.4, 0.4, 0.5, 0.55],
     info: [
       {
@@ -234,9 +233,9 @@ const areas = [
     ],
     description: "情報センターは最新のIT設備を備え、情報教育の中心となっています。"
   },
-  {
-    id: "⑨",
-    name: "理科棟",
+  { 
+    id: "⑨", 
+    name: "理科棟", 
     coords: [0.5, 0.25, 0.6, 0.4],
     info: [
       {
@@ -256,9 +255,9 @@ const areas = [
     ],
     description: "理科棟では自然科学系の実験や実習が行われています。"
   },
-  {
-    id: "⑩",
-    name: "芸術棟",
+  { 
+    id: "⑩", 
+    name: "芸術棟", 
     coords: [0.25, 0.35, 0.35, 0.5],
     info: [
       {
@@ -278,9 +277,9 @@ const areas = [
     ],
     description: "芸術棟では美術、音楽、演劇などの芸術活動が行われています。"
   },
-  {
-    id: "⑪",
-    name: "野球場",
+  { 
+    id: "⑪", 
+    name: "野球場", 
     coords: [0.55, 0.3, 0.75, 0.5],
     info: [
       {
@@ -293,9 +292,9 @@ const areas = [
     ],
     description: "野球場は本格的な設備を備え、大学リーグの試合も開催されています。"
   },
-  {
-    id: "⑫",
-    name: "陸上競技場",
+  { 
+    id: "⑫", 
+    name: "陸上競技場", 
     coords: [0.3, 0.55, 0.5, 0.7],
     info: [
       {
@@ -308,9 +307,9 @@ const areas = [
     ],
     description: "陸上競技場は400mトラックを備え、各種陸上競技大会が開催されています。"
   },
-  {
-    id: "⑬",
-    name: "プール",
+  { 
+    id: "⑬", 
+    name: "プール", 
     coords: [0.5, 0.55, 0.6, 0.65],
     info: [
       {
@@ -323,9 +322,9 @@ const areas = [
     ],
     description: "プールは温水設備を備え、年間を通して利用可能です。"
   },
-  {
-    id: "⑭",
-    name: "テニスコート",
+  { 
+    id: "⑭", 
+    name: "テニスコート", 
     coords: [0.65, 0.55, 0.75, 0.65],
     info: [
       {
@@ -341,241 +340,117 @@ const areas = [
 ];
 
 
-// メイン関数
-function initializeMap() {
-  const container = document.getElementById('map-container');
-  container.innerHTML = `
-    <h1 class="title">幾徳祭マップ</h1>
-    <div class="map-wrapper">
-      <img id="campus-map" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/facility_map-ccL63FThoLb2qr0S9oq4rLh9NaN5hU.jpg" alt="学園祭マップ">
-      <svg id="map-overlay"></svg>
-    </div>
-    <div id="area-info"></div>
-    <div id="area-list"></div>
-  `;
+function InteractiveCampusMap() {
+  const [imageSize, setImageSize] = React.useState({ width: 0, height: 0 });
+  const [selectedArea, setSelectedArea] = React.useState(null);
+  const imageRef = React.useRef(null);
 
-  const mapImage = document.getElementById('campus-map');
-  const mapOverlay = document.getElementById('map-overlay');
+  React.useEffect(() => {
+    const updateImageSize = () => {
+      if (imageRef.current) {
+        setImageSize({
+          width: imageRef.current.offsetWidth,
+          height: imageRef.current.offsetHeight
+        });
+      }
+    };
 
-  mapImage.onload = () => {
-    updateMapOverlay();
-    window.addEventListener('resize', updateMapOverlay);
+    window.addEventListener('resize', updateImageSize);
+    updateImageSize();
+
+    return () => window.removeEventListener('resize', updateImageSize);
+  }, []);
+
+  const handleAreaClick = (area) => {
+    setSelectedArea(area);
   };
 
-  createAreaList();
-}
-
-// マップオーバーレイの更新
-function updateMapOverlay() {
-  const mapImage = document.getElementById('campus-map');
-  const mapOverlay = document.getElementById('map-overlay');
-  mapOverlay.setAttribute('viewBox', `0 0 ${mapImage.width} ${mapImage.height}`);
-
-  mapOverlay.innerHTML = areas.map(area => `
-    <g class="map-area" data-id="${area.id}">
-      <circle
-        cx="${(area.coords[0] + area.coords[2]) / 2 * mapImage.width}"
-        cy="${(area.coords[1] + area.coords[3]) / 2 * mapImage.height}"
-        r="18"
-        fill="rgba(59, 130, 246, 0.8)"
-      />
-      <text
-        x="${(area.coords[0] + area.coords[2]) / 2 * mapImage.width}"
-        y="${(area.coords[1] + area.coords[3]) / 2 * mapImage.height}"
-        text-anchor="middle"
-        dominant-baseline="middle"
-        fill="white"
-        font-size="24"
-        font-weight="bold"
-      >${area.id}</text>
-    </g>
-  `).join('');
-
-  document.querySelectorAll('.map-area').forEach(element => {
-    element.addEventListener('click', () => {
-      const areaId = element.getAttribute('data-id');
-      const area = areas.find(a => a.id === areaId);
-      showAreaInfo(area);
-    });
-  });
-}
-
-// エリア情報の表示
-function showAreaInfo(area) {
-  const areaInfo = document.getElementById('area-info');
-  areaInfo.innerHTML = `
-    <div class="area-card">
-      <h2>${area.id} ${area.name}</h2>
-      <p>${area.description}</p>
-      <div class="area-details">
-        <table>
-          <thead>
-            <tr>
-              <th>階</th>
-              <th>部屋番号</th>
-              <th>名称</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${area.info.flatMap(floor =>
-    floor.rooms.map((room, index) => `
+  return (
+    <div className="interactive-map-container">
+      <h2 className="text-center mb-4">インタラクティブ学園祭マップ</h2>
+      <div className="map-image-container position-relative">
+        <img 
+          ref={imageRef}
+          src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/facility_map-ccL63FThoLb2qr0S9oq4rLh9NaN5hU.jpg" 
+          alt="学園祭マップ" 
+          className="img-fluid"
+        />
+        <svg className="position-absolute top-0 left-0 w-100 h-100">
+          {areas.map((area) => (
+            <g key={area.id} style={{cursor: 'pointer'}} onClick={() => handleAreaClick(area)}>
+              <circle
+                cx={`${(area.coords[0] + area.coords[2]) / 2 * 100}%`}
+                cy={`${(area.coords[1] + area.coords[3]) / 2 * 100}%`}
+                r="18"
+                fill="rgba(59, 130, 246, 0.8)"
+              />
+              <text
+                x={`${(area.coords[0] + area.coords[2]) / 2 * 100}%`}
+                y={`${(area.coords[1] + area.coords[3]) / 2 * 100}%`}
+                textAnchor="middle"
+                dominantBaseline="middle"
+                fill="white"
+                fontSize="24"
+                fontWeight="bold"
+              >
+                {area.id}
+              </text>
+            </g>
+          ))}
+        </svg>
+      </div>
+      {selectedArea && (
+        <div className="mt-4 p-3 border rounded">
+          <h3>{selectedArea.id} {selectedArea.name}</h3>
+          <p>{selectedArea.description}</p>
+          <div style={{maxHeight: '200px', overflowY: 'auto'}}>
+            <table className="table table-sm">
+              <thead>
                 <tr>
-                  ${index === 0 ? `<td rowspan="${floor.rooms.length}">${floor.floor}</td>` : ''}
-                  <td>${room.number}</td>
-                  <td>${room.name}</td>
+                  <th>階</th>
+                  <th>部屋番号</th>
+                  <th>名称</th>
                 </tr>
-              `).join('')
-  ).join('')}
-          </tbody>
-        </table>
+              </thead>
+              <tbody>
+                {selectedArea.info.flatMap((floor) =>
+                  floor.rooms.map((room, index) => (
+                    <tr key={`${floor.floor}-${room.number}`}>
+                      {index === 0 && (
+                        <td rowSpan={floor.rooms.length}>
+                          {floor.floor}
+                        </td>
+                      )}
+                      <td>{room.number}</td>
+                      <td>{room.name}</td>
+                    </tr>
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+      <div className="mt-4">
+        <h3 className="mb-3">施設一覧</h3>
+        <div className="row">
+          {areas.map((area) => (
+            <div key={area.id} className="col-md-3 col-sm-6 mb-3">
+              <button
+                className="btn btn-outline-primary w-100 text-left d-flex align-items-center"
+                onClick={() => handleAreaClick(area)}
+              >
+                <span className="mr-2 d-flex align-items-center justify-content-center bg-primary text-white rounded-circle" style={{width: '30px', height: '30px'}}>
+                  {area.id}
+                </span>
+                <span>{area.name}</span>
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
-  `;
+  );
 }
 
-// エリアリストの作成
-function createAreaList() {
-  const areaList = document.getElementById('area-list');
-  areaList.innerHTML = `
-    <h2>施設一覧</h2>
-    <ul class="area-buttons">
-      ${areas.map(area => `
-        <li>
-          <button class="area-button" data-id="${area.id}">
-            <span class="area-icon">${area.id}</span>
-            <span class="area-name">${area.name}</span>
-          </button>
-        </li>
-      `).join('')}
-    </ul>
-  `;
-
-  document.querySelectorAll('.area-button').forEach(button => {
-    button.addEventListener('click', () => {
-      const areaId = button.getAttribute('data-id');
-      const area = areas.find(a => a.id === areaId);
-      showAreaInfo(area);
-    });
-  });
-}
-
-// スタイルの適用
-const style = document.createElement('style');
-style.textContent = `
-  body {
-    font-family: Arial, sans-serif;
-    line-height: 1.6;
-    color: #333;
-    max-width: 1200px;
-     margin: 0; /* マージンを0に設定 */
-    padding: 0; /* パディングを0に設定 */
-    background: url('../images/back1.png') no-repeat center center fixed;
-    background-size: cover;
-    
-  }
-  .title {
-    text-align: center;
-    color: #1a202c;
-    font-size: 2.5rem;
-    margin-bottom: 2rem;
-  }
-  .map-wrapper {
-    position: relative;
-    width: 100%;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-  #campus-map {
-    width: 100%;
-    height: auto;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  #map-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-  }
-  .map-area {
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .map-area:hover circle {
-    fill-opacity: 1;
-  }
-  .area-card {
-    background: white;
-    border-radius: 10px;
-    padding: 20px;
-    margin-top: 20px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  }
-  .area-card h2 {
-    color: #2c5282;
-    border-bottom: 2px solid #2c5282;
-    padding-bottom: 10px;
-    margin-bottom: 15px;
-  }
-  .area-details {
-    max-height: none; /* スクロールをなくすために高さ制限を解除 */
-    overflow-y: visible; /* スクロールをなくすためにオーバーフローを表示 */
-    margin-top: 15px;
-  }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  th, td {
-    border: 1px solid #e2e8f0;
-    padding: 12px;
-    text-align: left;
-  }
-  th {
-    background-color: #edf2f7;
-    font-weight: bold;
-  }
-  .area-buttons {
-    list-style: none;
-    padding: 0;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 10px;
-    margin-top: 20px;
-  }
-  .area-button {
-    display: flex;
-    align-items: center;
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #cbd5e0;
-    border-radius: 5px;
-    background-color: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  .area-button:hover {
-    background-color: #edf2f7;
-  }
-  .area-icon {
-    width: 30px;
-    height: 30px;
-    background-color: #3182ce;
-    color: white;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    margin-right: 10px;
-  }
-  .area-name {
-    flex-grow: 1;
-    text-align: left;
-  }
-`;
-document.head.appendChild(style);
-
-// 初期化
-document.addEventListener('DOMContentLoaded', initializeMap);
+ReactDOM.render(<InteractiveCampusMap />, document.getElementById('interactive-map'));

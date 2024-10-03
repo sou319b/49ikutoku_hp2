@@ -156,3 +156,9 @@ body {
     height: 100%;
     width: 100%;
 }
+
+.map-css {
+    text-align: center;
+    margin: 0 auto; /* マップコンテナを中央に配置 */
+    width: 80%; /* 必要に応じて幅を調整 */
+}

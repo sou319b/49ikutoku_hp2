@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>神奈川工科大学　第49回幾徳祭公式HP</title>
+    <link rel="icon" href="images/icon1.png" type="image/x-icon">
+    <script defer src="script.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: auto;
+        }
+
+        iframe {
+            overflow: hidden;
+        }
+    </style>
+
+</head>
+
+<body>
+    <!--ヘッダー-->
+    <div id="header"></div>
+    <!--ヘッダー終わり　-->
+    <br><br><br>
+
+    <div class="container">
+
+
+
+        <iframe src="./Ikutokusai-MAP2/map4.html"   onload="resizeIframe(this)"></iframe>
+
+        <br>
+        <hr>
+        <br>
+        <br />
+        <br />
+        <br />
+        <br>
+        <hr> <!-- hr 線ひくー-->
+        <!--フッダー-->
+        <hr>
+
+        <div class="row">
+            <div class="text-center col-lg-6 offset-lg-3">
+
+
+                <p class="hudar1">Copyright &copy; 2024 &middot; 神奈川工科大学学友会イベント局 </p>
+            </div>
+        </div>
+        <!--フッダー-->
+    </div>
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="js/jquery-3.4.1.min.js"></script>
+    <script>
+         function resizeIframe(obj) {
+        obj.style.height = obj.contentWindow.document.body.scrollHeight + 'px';
+    }
+    </script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap-4.4.1.js"></script>
+</body>
+
+</html>
