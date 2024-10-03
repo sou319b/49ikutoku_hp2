@@ -463,15 +463,19 @@ function createAreaList() {
 const style = document.createElement('style');
 style.textContent = `
   body {
+    display: flex; /* フレックスボックスを使用 */
+    justify-content: center; /* 水平方向の中央揃え */
+    height: 100vh; /* ビューポートの高さを100%に設定 */
     font-family: Arial, sans-serif;
     line-height: 1.6;
     color: #333;
-    max-width: 1200px;
-     margin: 0; /* マージンを0に設定 */
-    padding: 0; /* パディングを0に設定 */
+    margin: 0;
+    padding: 0;
     background: url('../images/back1.png') no-repeat center center fixed;
     background-size: cover;
     
+   
+   
   }
   .title {
     text-align: center;
