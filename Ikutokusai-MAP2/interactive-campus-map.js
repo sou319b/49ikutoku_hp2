@@ -437,6 +437,7 @@ function showAreaInfo(area) {
 function createAreaList() {
   const areaList = document.getElementById('area-list');
   areaList.innerHTML = `
+    <br>
     <h2>施設一覧</h2>
     <ul class="area-buttons">
       ${areas.map(area => `
