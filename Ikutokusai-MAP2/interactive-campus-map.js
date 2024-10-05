@@ -131,212 +131,197 @@ const areas = [
     ],
     description: ""
   },
-  {
-    id: "よ",
-    name: "図書館",
-    coords: [0.75, 0.55, 0.85, 0.7],
-    info: [
-      {
-        floor: "1階",
-        rooms: [
-          { number: "101", name: "開架図書室" },
-          { number: "102", name: "閲覧室" }
-        ]
-      },
-      {
-        floor: "2階",
-        rooms: [
-          { number: "201", name: "学習室" },
-          { number: "202", name: "AV資料室" }
-        ]
-      }
-    ],
-    description: "図書館は24時間開館しており、豊富な蔵書と快適な学習環境を提供しています。"
-  },
+  
   {
     id: "⑤",
-    name: "体育館",
-    coords: [0.2, 0.5, 0.35, 0.65],
+    name: "C2号館",
+    coords: [0.07, 0.5, 0.35, 0.65],
     info: [
       {
         floor: "1階",
         rooms: [
-          { number: "101", name: "アリーナ" },
-          { number: "102", name: "器具室" }
+          { number: "ラウンジ", name: "鉄道研究部" },
         ]
       },
       {
         floor: "2階",
         rooms: [
-          { number: "201", name: "観覧席" },
-          { number: "202", name: "部室" }
+          { number: "E204・E206", name: "H科・E科 EIコース" },
+          { number: "E204・E206", name: "Life Hacker's" },
+        ]
+      },
+      {
+        floor: "3階",
+        rooms: [
+          { number: "E304", name: "教育機械工学研究室" },
+        ]
+      },
+      {
+        floor: "5階",
+        rooms: [
+          { number: "E501", name: "工藤研究室" },
         ]
       }
     ],
-    description: "体育館では体育の授業や各種スポーツ大会が開催されます。"
+    description: ""
   },
   {
     id: "⑥",
-    name: "学生会館",
-    coords: [0.15, 0.7, 0.25, 0.85],
+    name: "C5号館",
+    coords: [0.1, 0.8, 0.25, 0.85],
     info: [
       {
         floor: "1階",
         rooms: [
-          { number: "101", name: "学生ラウンジ" },
-          { number: "102", name: "売店" }
-        ]
-      },
-      {
-        floor: "2階",
-        rooms: [
-          { number: "201", name: "サークル室" },
-          { number: "202", name: "多目的ホール" }
+          { number: "124", name: "知能モビリティ研究室" },
+          { number: "109・130", name: "岡崎研究室" },
         ]
       }
     ],
-    description: "学生会館は学生生活の中心となる施設です。"
+    description: ""
   },
   {
     id: "⑦",
-    name: "食堂",
-    coords: [0.3, 0.75, 0.4, 0.85],
+    name: "C6号館",
+    coords: [0.21, 0.8, 0.4, 0.85],
     info: [
       {
         floor: "1階",
         rooms: [
-          { number: "101", name: "メインダイニング" },
-          { number: "102", name: "カフェテリア" }
+          { number: "102", name: "生命科学研究室" },
+        ]
+      },
+      {
+        floor: "2階",
+        rooms: [
+          { number: "Bio Lounge", name: "LOVOTサークル" },
+        ]
+      },
+      {
+        floor: "5階",
+        rooms: [
+          { number: "501", name: "利き酒サークル" },
         ]
       }
     ],
-    description: "食堂では多様なメニューを提供しており、学生や教職員の憩いの場となっています。"
+    description: ""
   },
   {
     id: "⑧",
-    name: "情報センター",
-    coords: [0.4, 0.4, 0.5, 0.55],
+    name: "E1号館",
+    coords: [0.2, 0.2, 0.5, 0.55],
     info: [
       {
-        floor: "1階",
+        floor: "3階",
         rooms: [
-          { number: "101", name: "コンピュータ実習室" },
-          { number: "102", name: "サーバー室" }
+          { number: "301", name: "フルードパワー・災害救助ロボット研究室" },
         ]
       },
-      {
-        floor: "2階",
-        rooms: [
-          { number: "201", name: "メディアラボ" },
-          { number: "202", name: "IT相談室" }
-        ]
-      }
+      
     ],
-    description: "情報センターは最新のIT設備を備え、情報教育の中心となっています。"
+    description: ""
   },
   {
     id: "⑨",
-    name: "理科棟",
-    coords: [0.5, 0.25, 0.6, 0.4],
+    name: "E2号館",
+    coords: [0.21, 0.1, 0.5, 0.4],
     info: [
       {
         floor: "1階",
         rooms: [
-          { number: "101", name: "化学実験室" },
-          { number: "102", name: "物理実験室" }
+          { number: "エントランスホール", name: "応用化学生物学科" },
         ]
       },
       {
-        floor: "2階",
+        floor: "4階",
         rooms: [
-          { number: "201", name: "生物実験室" },
-          { number: "202", name: "地学実験室" }
+          { number: "401", name: "髙村研究室" },
+        ]
+      },
+      {
+        floor: "5階",
+        rooms: [
+          { number: "501・502", name: "山口研究室" },
         ]
       }
     ],
-    description: "理科棟では自然科学系の実験や実習が行われています。"
+    description: ""
   },
   {
     id: "⑩",
-    name: "芸術棟",
-    coords: [0.25, 0.35, 0.35, 0.5],
+    name: "E6号館",
+    coords: [0.03, 0.25, 0.35, 0.5],
     info: [
       {
         floor: "1階",
         rooms: [
-          { number: "101", name: "美術室" },
-          { number: "102", name: "音楽室" }
+          { number: "1", name: "aaa" },
+         
         ]
       },
-      {
-        floor: "2階",
-        rooms: [
-          { number: "201", name: "演劇スタジオ" },
-          { number: "202", name: "ギャラリー" }
-        ]
-      }
+      
     ],
-    description: "芸術棟では美術、音楽、演劇などの芸術活動が行われています。"
+    description: ""
   },
   {
     id: "⑪",
-    name: "野球場",
+    name: "KAIT広場",
     coords: [0.55, 0.3, 0.75, 0.5],
     info: [
       {
         floor: "施設",
         rooms: [
-          { number: "1", name: "メインスタンド" },
-          { number: "2", name: "ブルペン" }
+          { number: "1", name: "あああ" },
+          
         ]
       }
     ],
-    description: "野球場は本格的な設備を備え、大学リーグの試合も開催されています。"
+    description: ""
   },
   {
     id: "⑫",
-    name: "陸上競技場",
+    name: "KAIT TOWN",
     coords: [0.3, 0.55, 0.5, 0.7],
     info: [
       {
         floor: "施設",
         rooms: [
-          { number: "1", name: "トラック" },
-          { number: "2", name: "フィールド" }
+          { number: "1", name: "aaa" },
+         
         ]
       }
     ],
-    description: "陸上競技場は400mトラックを備え、各種陸上競技大会が開催されています。"
+    description: ""
   },
   {
     id: "⑬",
-    name: "プール",
+    name: "KAIT工房",
     coords: [0.5, 0.55, 0.6, 0.65],
     info: [
       {
         floor: "施設",
         rooms: [
-          { number: "1", name: "25mプール" },
-          { number: "2", name: "更衣室" }
+          { number: "1", name: "ああ" },
+         
         ]
       }
     ],
-    description: "プールは温水設備を備え、年間を通して利用可能です。"
+    description: ""
   },
   {
     id: "⑭",
-    name: "テニスコート",
+    name: "先進技術研究所",
     coords: [0.65, 0.55, 0.75, 0.65],
     info: [
       {
         floor: "施設",
         rooms: [
-          { number: "1-4", name: "ハードコート" },
-          { number: "5-6", name: "クレーコート" }
+          { number: "1", name: "8k" },
+          
         ]
       }
     ],
-    description: "テニスコートは6面あり、テニス部の活動や一般学生の利用に供されています。"
+    description: ""
   }
 ];
 
@@ -347,7 +332,7 @@ function initializeMap() {
   container.innerHTML = `
     <h1 class="title">幾徳祭マップ</h1>
     <div class="map-wrapper">
-      <img id="campus-map" src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/facility_map-ccL63FThoLb2qr0S9oq4rLh9NaN5hU.jpg" alt="学園祭マップ">
+      <img id="campus-map" src="http://kait-circle.jp/jikkou/Ikutokusai-MAP2/facility_map.jpg" alt="学園祭マップ">
       <svg id="map-overlay"></svg>
     </div>
     <div id="area-info"></div>
@@ -371,25 +356,29 @@ function updateMapOverlay() {
   const mapOverlay = document.getElementById('map-overlay');
   mapOverlay.setAttribute('viewBox', `0 0 ${mapImage.width} ${mapImage.height}`);
 
-  mapOverlay.innerHTML = areas.map(area => `
-    <g class="map-area" data-id="${area.id}">
-      <circle
-        cx="${(area.coords[0] + area.coords[2]) / 2 * mapImage.width}"
-        cy="${(area.coords[1] + area.coords[3]) / 2 * mapImage.height}"
-        r="18"
-        fill="rgba(59, 130, 246, 0.8)"
-      />
-      <text
-        x="${(area.coords[0] + area.coords[2]) / 2 * mapImage.width}"
-        y="${(area.coords[1] + area.coords[3]) / 2 * mapImage.height}"
-        text-anchor="middle"
-        dominant-baseline="middle"
-        fill="white"
-        font-size="24"
-        font-weight="bold"
-      >${area.id}</text>
-    </g>
-  `).join('');
+  mapOverlay.innerHTML = areas.map(area => {
+    const cx = (area.coords[0] + area.coords[2]) / 2 * mapImage.width;
+    const cy = (area.coords[1] + area.coords[3]) / 2 * mapImage.height;
+    return `
+        <g class="map-area" data-id="${area.id}">
+            <circle
+                cx="${cx}"
+                cy="${cy}"
+                r="12"  // 円の半径
+                fill="rgba(59, 130, 246, 0.8)"
+            />
+            <text
+                x="${cx - 0.5}"
+                y="${cy + 1}"
+                text-anchor="middle"
+                dominant-baseline="middle"
+                fill="white"
+                font-size="18"  // テキストのフォントサイズ
+                font-weight="bold"
+            >${area.id}</text>
+        </g>
+    `;
+}).join('');
 
   document.querySelectorAll('.map-area').forEach(element => {
     element.addEventListener('click', () => {
