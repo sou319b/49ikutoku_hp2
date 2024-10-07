@@ -255,7 +255,7 @@ const areas = [
       {
         floor: "1階",
         rooms: [
-          { number: "1", name: "aaa" },
+          { number: "V-07", name: "KAIT Racing" },
          
         ]
       },
@@ -266,12 +266,12 @@ const areas = [
   {
     id: "⑪",
     name: "KAIT広場",
-    coords: [0.55, 0.3, 0.75, 0.5],
+    coords: [0.3, 0.3, 0.75, 0.5],
     info: [
       {
-        floor: "施設",
+        floor: "1階",
         rooms: [
-          { number: "1", name: "あああ" },
+          { number: "", name: "北本研究室" },
           
         ]
       }
@@ -281,12 +281,12 @@ const areas = [
   {
     id: "⑫",
     name: "KAIT TOWN",
-    coords: [0.3, 0.55, 0.5, 0.7],
+    coords: [0.16, 0.25, 0.5, 0.7],
     info: [
       {
-        floor: "施設",
+        floor: "2階",
         rooms: [
-          { number: "1", name: "aaa" },
+          { number: "コミュニティ室B", name: "KAIT SDGs HUB" },
          
         ]
       }
@@ -296,12 +296,12 @@ const areas = [
   {
     id: "⑬",
     name: "KAIT工房",
-    coords: [0.5, 0.55, 0.6, 0.65],
+    coords: [0.3, 0.3, 0.6, 0.65],
     info: [
       {
-        floor: "施設",
+        floor: "1階",
         rooms: [
-          { number: "1", name: "ああ" },
+          { number: "", name: "KAIT EDTC" },
          
         ]
       }
@@ -311,13 +311,47 @@ const areas = [
   {
     id: "⑭",
     name: "先進技術研究所",
-    coords: [0.65, 0.55, 0.75, 0.65],
+    coords: [0.48, 0.5, 0.75, 0.65],
     info: [
       {
-        floor: "施設",
+        floor: "1階・2階",
         rooms: [
-          { number: "1", name: "8k" },
+          { number: "D2-207,208", name: "丸山研究室" },
           
+        ]
+      }
+    ],
+    description: ""
+  },
+  {
+    id: "⑮",
+    name: "中央緑地",
+    coords: [0.3, 0.6, 0.75, 0.65],
+    info: [
+      {
+        floor: "",
+        rooms: [
+        
+          { number: "", name: "ふわふわお好み焼き" },
+          { number: "", name: "陳研のクレープ屋さん" },
+          { number: "", name: "たこ焼きサークル" },
+          { number: "", name: "ポップコーン" },
+          { number: "", name: "豚汁" },
+          { number: "", name: "ラグビー部 焼きそば" },
+          { number: "", name: "フルーツ飴" },
+          { number: "", name: "ハッシュドポテト" },
+          { number: "", name: "ホットドック屋" },
+          { number: "", name: "わたあめ屋" },
+          { number: "", name: "俺のから揚げ" },
+          { number: "", name: "Pia's bakery・揚げパン" },
+          { number: "", name: "ヒアリングポテト" },
+          { number: "", name: "サーターアンダギー屋" },
+          { number: "", name: "餃子BOSS・浜松餃子" },
+          { number: "", name: "フランクフルト" },
+          { number: "", name: "幾徳学園同窓会ダーツ" },
+          { number: "", name: "縁日屋台" },
+          
+
         ]
       }
     ],
