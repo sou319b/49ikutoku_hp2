@@ -349,14 +349,32 @@ const areas = [
           { number: "", name: "餃子BOSS・浜松餃子" },
           { number: "", name: "フランクフルト" },
           { number: "", name: "幾徳学園同窓会ダーツ" },
-          { number: "", name: "縁日屋台" },
+          { number: "", name: "縁日" },
           
 
         ]
       }
     ],
     description: ""
-  }
+  },
+  {
+    id: "⑯",
+    name: "KAITアリーナ",
+    coords: [0.75, 0.2, 0.75, 0.65],
+    info: [
+      {
+        floor: "1階",
+        rooms: [
+          { number: "アリーナ", name: "トークショー" },
+          { number: "アリーナ", name: "吹奏楽" },
+          { number: "アリーナ", name: "合気道" },
+          { number: "アリーナ", name: "ビンゴ大会" },
+          
+        ]
+      }
+    ],
+    description: ""
+  },
 ];
 
 
