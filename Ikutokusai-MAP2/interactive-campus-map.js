@@ -453,8 +453,8 @@ function showAreaInfo(area) {
           <thead>
             <tr>
               <th>階</th>
-              <th>部屋番号</th>
-              <th>名称</th>
+              <th>教室番号</th>
+              <th>企画</th>
             </tr>
           </thead>
           <tbody>
