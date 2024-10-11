@@ -378,6 +378,14 @@ const areas = [
 ];
 
 
+// URLパラメータを解析する関数
+function getUrlParameter(name) {
+  name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+  var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+  var results = regex.exec(location.search);
+  return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+}
+
 // メイン関数
 function initializeMap() {
   const container = document.getElementById('map-container');
@@ -400,6 +408,16 @@ function initializeMap() {
   };
 
   createAreaList();
+  const areaId = getUrlParameter('area');
+  if (areaId) {
+    const area = areas.find(a => a.id === areaId);
+    if (area) {
+      setTimeout(() => {
+        showAreaInfo(area);
+        highlightArea(area.id);
+      }, 250); // マップの読み込みを待つために少し遅延させる
+    }
+  }
 }
 
 // マップオーバーレイの更新
@@ -444,6 +462,7 @@ function updateMapOverlay() {
 // エリア情報の表示
 function showAreaInfo(area) {
   const areaInfo = document.getElementById('area-info');
+  areaInfo.scrollIntoView({ behavior: 'smooth', block: 'start' });
   areaInfo.innerHTML = `
     <div class="area-card">
       <h2>${area.id} ${area.name}</h2>
@@ -472,6 +491,7 @@ function showAreaInfo(area) {
       </div>
     </div>
   `;
+  
 }
 
 // エリアリストの作成
@@ -500,6 +520,19 @@ function createAreaList() {
     });
   });
 }
+
+
+// エリアをハイライトする関数を追加
+function highlightArea(areaId) {
+  document.querySelectorAll('.map-area').forEach(element => {
+    if (element.getAttribute('data-id') === areaId) {
+      element.querySelector('circle').setAttribute('fill', 'rgba(255, 0, 0, 0.8)'); // 赤色でハイライト
+    } else {
+      element.querySelector('circle').setAttribute('fill', 'rgba(59, 130, 246, 0.8)'); // 元の色に戻す
+    }
+  });
+}
+
 
 // スタイルの適用
 const style = document.createElement('style');
