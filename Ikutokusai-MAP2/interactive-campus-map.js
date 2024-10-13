@@ -10,6 +10,7 @@ const areas = [
         floor: "1階",
         rooms: [
           { number: "106", name: "ソフトウェア工房" },
+          { number: "フリースペース", name: "入試課" },
         ]
       },
       {
@@ -473,7 +474,7 @@ function showAreaInfo(area) {
             <tr>
               <th>階</th>
               <th>教室番号</th>
-              <th>企画</th>
+              <th>団体名</th>
             </tr>
           </thead>
           <tbody>
