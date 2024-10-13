@@ -331,7 +331,8 @@ const areas = [
       {
         floor: "",
         rooms: [
-        
+          { number: "", name: "総合受付＆案内（ビンゴカード配布）" },
+          { number: "", name: "縁日" },
           { number: "", name: "ふわふわお好み焼き" },
           { number: "", name: "陳研のクレープ屋さん" },
           { number: "", name: "たこ焼きサークル" },
@@ -349,8 +350,7 @@ const areas = [
           { number: "", name: "餃子BOSS・浜松餃子" },
           { number: "", name: "フランクフルト" },
           { number: "", name: "幾徳学園同窓会ダーツ" },
-          { number: "", name: "縁日" },
-          
+         
 
         ]
       }

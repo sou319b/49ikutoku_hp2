@@ -1,0 +1,32 @@
+<p>場所：<a href="./map2.5.html?area=⑯">KAITアリーナ</a></p>
+
+<p>場所：<a href="./map2.5.html?area=⑮">中央緑地</a></p>
+
+<p>場所：<a href="./map2.5.html?area=①">K1号館</a></p>
+
+<p>場所：<a href="./map2.5.html?area=②">K2号館</a></p>
+
+<p>場所：<a href="./map2.5.html?area=③">K3号館</a></p>
+
+<p>場所：<a href="./map2.5.html?area=④">K4号館</a></p>
+
+<p>場所：<a href="./map2.5.html?area=⑤">C2号館</a></p>
+
+<p>場所：<a href="./map2.5.html?area=⑥">C5号館</a></p>
+
+<p>場所：<a href="./map2.5.html?area=⑦">C6号館</a></p>
+
+<p>場所：<a href="./map2.5.html?area=⑧">E1号館</a></p>
+
+<p>場所：<a href="./map2.5.html?area=⑨">E2号館</a></p>
+
+<p>場所：<a href="./map2.5.html?area=⑩">E6号館</a></p>
+
+<p>場所：<a href="./map2.5.html?area=⑪">KAIT広場</a></p>
+
+<p>場所：<a href="./map2.5.html?area=⑫">KAIT TOWN</a></p>
+
+<p>場所：<a href="./map2.5.html?area=⑬">KAIT工房</a></p>
+
+<p>場所：<a href="./map2.5.html?area=⑭">先進技術研究所</a></p>
+
