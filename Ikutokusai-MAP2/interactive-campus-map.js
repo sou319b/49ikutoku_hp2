@@ -18,13 +18,14 @@ const areas = [
         rooms: [
           { number: "803", name: "田中博研究室" },
           { number: "806", name: "鷹野研究室" },
-          { number: "811", name: "納富研究室" }
+          { number: "811", name: "納富研究室" },
+          { number: "815", name: "田中哲雄研究室" }
         ]
       },
       {
         floor: "11階",
         rooms: [
-          { number: "815", name: "情報メディア学科 服部研究室" }
+          { number: "1115", name: "情報メディア学科 服部研究室" }
         ]
       }
 
@@ -71,7 +72,7 @@ const areas = [
       {
         floor: "3階",
         rooms: [
-          { number: "3301", name: "airteam" },
+          { number: "3301", name: "air team" },
           { number: "3303", name: "ポケモンだいすきクラブ" },
           { number: "3304", name: "オーディオ研究部" },
           { number: "3306", name: "KAIT VR" },
@@ -92,7 +93,7 @@ const areas = [
         floor: "5階",
         rooms: [
           { number: "3501", name: "工学部システムエネルギー学研究室" },
-          { number: "3503", name: "メディアデザインサークル_Cretopia~メディアデザインサークル~" },
+          { number: "3503", name: "メディアデザインサークル_Cretopia" },
           { number: "3504", name: "神奈川工科大学 サバゲーサークル Kaits" },
           { number: "3505", name: "KAITRPG" }
         ]
