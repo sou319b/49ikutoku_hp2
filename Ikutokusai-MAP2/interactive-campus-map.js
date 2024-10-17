@@ -10,7 +10,7 @@ const areas = [
         floor: "1階",
         rooms: [
           { number: "106", name: "ソフトウェア工房" },
-          { number: "フリースペース", name: "入試課" },
+          { number: "フリースペース", name: "進学相談会（入試課）" },
         ]
       },
       {
@@ -25,7 +25,7 @@ const areas = [
       {
         floor: "11階",
         rooms: [
-          { number: "1115", name: "情報メディア学科 服部研究室" }
+          { number: "1115", name: "服部研究室" }
         ]
       }
 
@@ -149,7 +149,7 @@ const areas = [
         floor: "2階",
         rooms: [
           { number: "E204・E206", name: "H科・E科 EIコース" },
-          { number: "E204・E206", name: "Life Hacker's" },
+          { number: "E204・E206", name: "Life Hackers" },
         ]
       },
       {
