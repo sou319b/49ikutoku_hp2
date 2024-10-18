@@ -10,6 +10,11 @@ const areas = [
         floor: "1階",
         rooms: [
           { number: "106", name: "ソフトウェア工房" },
+        ]
+      },
+      {
+        floor: "2階",
+        rooms: [
           { number: "フリースペース", name: "進学相談会（入試課）" },
         ]
       },
@@ -42,7 +47,7 @@ const areas = [
       {
         floor: "1階",
         rooms: [
-          { number: "", name: "ホームカミングデー(総務課)" },
+          { number: "", name: "ホームカミングデー受付(総務課)" },
         ]
       },
       {
