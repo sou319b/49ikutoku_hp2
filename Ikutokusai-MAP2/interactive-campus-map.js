@@ -40,6 +40,12 @@ const areas = [
     coords: [0.42, 0.8, 0.5, 0.85],
     info: [
       {
+        floor: "1階",
+        rooms: [
+          { number: "", name: "ホームカミングデー(総務課)" },
+        ]
+      },
+      {
         floor: "3階",
         rooms: [
           { number: "1302", name: "PSE" },
