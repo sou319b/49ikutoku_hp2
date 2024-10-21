@@ -159,8 +159,8 @@ const areas = [
       {
         floor: "2階",
         rooms: [
-          { number: "E204・E206", name: "H科・E科 EIコース" },
-          { number: "E204・E206", name: "Life Hackers" },
+          { number: "全体", name: "H科・E科 EIコース" },
+          { number: "E204・E205", name: "Life Hackers" },
         ]
       },
       {
