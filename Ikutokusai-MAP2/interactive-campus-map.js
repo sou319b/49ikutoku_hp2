@@ -103,8 +103,8 @@ const areas = [
       {
         floor: "5階",
         rooms: [
-          { number: "3501", name: "工学部システムエネルギー学研究室" },
-          { number: "3503", name: "メディアデザインサークル_Cretopia" },
+         
+          { number: "3503", name: "メディアデザインサークル~Cretopia~" },
           { number: "3504", name: "神奈川工科大学 サバゲーサークル Kaits" },
           { number: "3505", name: "KAITRPG" }
         ]
