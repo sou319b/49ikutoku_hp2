@@ -346,22 +346,25 @@ const areas = [
         rooms: [
           { number: "", name: "総合受付＆案内（ビンゴカード配布）" },
           { number: "", name: "縁日" },
-          { number: "", name: "ふわふわお好み焼き" },
-          { number: "", name: "陳研のクレープ屋さん" },
-          { number: "", name: "たこ焼きサークル" },
-          { number: "", name: "ポップコーン" },
-          { number: "", name: "豚汁" },
-          { number: "", name: "ラグビー部 焼きそば" },
-          { number: "", name: "フルーツ飴" },
-          { number: "", name: "ハッシュドポテト" },
-          { number: "", name: "ホットドック屋" },
           { number: "", name: "わたあめ屋" },
-          { number: "", name: "俺のから揚げ" },
           { number: "", name: "Pia's bakery・揚げパン" },
-          { number: "", name: "ヒアリングポテト" },
+          { number: "", name: "ふわふわお好み焼き" },
+          { number: "", name: "たこ焼きサークル" },
           { number: "", name: "サーターアンダギー屋" },
-          { number: "", name: "餃子BOSS・浜松餃子" },
+          { number: "", name: "ホットドック屋" },
+          { number: "", name: "焼きそば" },
+          { number: "", name: "餃子BOSS" },
+          { number: "", name: "ハッシュドポテト" },
           { number: "", name: "フランクフルト" },
+          { number: "", name: "ポップコーン" },
+          { number: "", name: "俺のから揚げ" },
+          { number: "", name: "クレープ屋さん" },
+          { number: "", name: "豚汁" },
+          { number: "", name: "フルーツ飴" },
+          { number: "", name: "ヒアリングポテト" },
+        
+       
+         
           { number: "", name: "幾徳学園同窓会ダーツ" },
          
 
