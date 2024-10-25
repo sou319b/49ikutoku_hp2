@@ -74,8 +74,8 @@ const areas = [
       {
         floor: "1階",
         rooms: [
-          { number: "3101", name: "JAZZ研究部" },
-          { number: "3101", name: "D科西口研究室" },
+          { number: "3101", name: "JAZZ研究部・楽器音響プロジェクト" },
+          
           { number: "3102", name: "軽音サークル" },
           { number: "3102", name: "Rock in KAIT" }
         ]
